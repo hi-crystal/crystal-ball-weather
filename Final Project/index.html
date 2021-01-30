@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Week 3</title>
+    <meta charset="UTF-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <script src="https://kit.fontawesome.com/fc3f3fad25.js" crossorigin="anonymous"></script>
+    <link href="src/styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>
+        🔮 Crystal Ball Weather
+      </h1>
+      <h2>
+        Current Date
+      </h2>
+      <hr />
+      <form id="location-form">
+        <div class="row">
+          <div class="col-10">
+              <input  
+              class="form-control"
+              type="location"
+              id="location-input"
+              placeholder="Enter your location (e.g. Spokane, WA)"
+              >
+          </div>
+          <div class="col-2">
+              <input  
+              class="btn btn-primary" 
+              type="submit"  
+              value="Go ➜" 
+              >
+          </div>
+        </div>
+      </form>
+      <div class="cf-select">
+          <a href="" id="cel-select">
+              Celcius
+          </a>
+          <span class="separate">
+            |
+          </span>
+          <a href="" id=far-select>
+            Farenheit
+            </a>
+        </div>
+      <p>
+        It's currently 
+        <img src="images/sun.svg" alt="sun">
+        <span class="current temperature">36</span>
+        <span class="current degree">°F</span>
+        in
+        <span class="current location">Somerville, MA</span>
+      </p>
+      <div class="card" style="width: 100%;">
+          <div class="card-body">
+            <h5 class="card-title">Coming Up Next</h5>
+            <div class="row row-cols-5">
+              <div class="col">
+                <div class="card text-center  h-100">
+                    <img src="images/snow.svg" class="card-img-top" alt="Snowing">
+                  <div class="card-title">
+                      Monday
+                    </div>
+                  <div class="card-body">
+                    36 / 25
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                  <div class="card text-center h-100">
+                  <img src="images/sun.svg" class="card-img-top" alt="Snowing">
+                    <div class="card-title">
+                      Tuesday
+                    </div>
+                    <div class="card-body">
+                      37 / 19
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center  h-100">
+                    <img src="images/rain.svg" class="card-img-top" alt="Snowing">
+                      <div class="card-title">
+                          Wednesday
+                        </div>
+                        <div class="card-body">
+                          39 / 30
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                      <div class="card text-center  h-100">
+                      <img src="images/rain.svg" class="card-img-top" alt="Snowing">
+                        <div class="card-title">
+                            Thursday
+                          </div>
+                          <div class="card-body">
+                            45 / 27
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center h-100">
+                        <img src="images/sun.svg" class="card-img-top" alt="Snowing">
+                          <div class="card-title">
+                              Friday
+                            </div>
+                            <div class="card-body">
+                              43 / 34
+                            </div>
+                        </div>
+                      </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>

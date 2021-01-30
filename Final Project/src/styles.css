@@ -1,0 +1,27 @@
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+h1 {
+  color: #654062;
+  font-variant: small-caps;
+}
+h2 {
+  font: bold;
+  font-size: medium;
+}
+img {
+  width: 100px;
+}
+p {
+  text-align: center;
+}
+.current {
+  color: #67e1fc;
+}
+form div {
+  text-align: center;
+}
+.cf-select {
+  text-align: center;
+  padding: 10px 10px 10px;
+}
