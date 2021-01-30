@@ -1,5 +1,3 @@
-import axios from "axios";
-
 // Time display
 function formatDate(today) {
   let days = [
@@ -26,11 +24,9 @@ function formatDate(today) {
 //Temp display in default units
 function displayTemp(response) {
   let currentTemp = Math.round(response.data.main.temp);
-  let city = response.data.name;
   let defaultUnit = "°C";
-  document.querySelector("p .temperature").innerHTML = currentTemp;
-  document.querySelector("p .degree").innerHTML = defaultUnit;
-  document.querySelector("p .location").innerHTML = city;
+  let city = response.data.name;
+  document.querySelector("p").innerHTML = `It's currently ${currentTemp}${defaultUnit} in ${city}`;
 }
 
 // Location entry form
@@ -78,7 +74,7 @@ function serveFarenheit(event) {
 }
 
 let currentTime = new Date();
-let todaysDate = document.querySelector("h2");
+let todaysDate = document.querySelector("#local-time");
 todaysDate.innerHTML = formatDate(currentTime);
 
 let locationForm = document.querySelector("#location-form");
