@@ -4,6 +4,8 @@ body {
 h1 {
   color: #654062;
   font-variant: small-caps;
+  padding: 20px 0px;
+  margin: 0px;
 }
 .time {
   font: bold;
@@ -33,4 +35,10 @@ form div {
   color: #654062;
   background: white;
   box-shadow: 2px 2px;
+}
+.link a {
+  text-decoration-line: none;
+  display: block;
+  text-align: center;
+  margin: 40px;
 }
