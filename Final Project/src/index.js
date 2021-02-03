@@ -1,5 +1,20 @@
-// Time display
-function formatDate(today) {
+
+function formatTime(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${formatDate(timestamp)} ${hours}:${minutes}`;
+}
+
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  console.log(date);
   let days = [
     "Sunday",
     "Monday",
@@ -9,16 +24,10 @@ function formatDate(today) {
     "Friday",
     "Saturday"
   ];
-  let day = days[today.getDay()];
-  let currentHour = today.getHours();
-  if (currentHour < 10) {
-    currentHour = `0${currentHour}`;
-  }
-  let currentMinutes = today.getMinutes();
-  if (currentMinutes < 10) {
-    currentMinutes = `0${currentMinutes}`;
-  }
-  return `${day} ${currentHour}:${currentMinutes}`;
+  let day = days[date.getDay()];
+  console.log(day);
+
+  return `${day}`;
 }
 
 //5-day forecast display
@@ -27,14 +36,14 @@ function displayForecast(response) {
   forecastElement.innerHTML = null;
   let forecast = null;
 
-  for (let index = 0; index < 5; index++) {
+  for (let index = 1; index < 6; index++) {
     forecast = response.data.daily[index];
     console.log(forecast);
     forecastElement.innerHTML += `
     <div class="col">
     <div class="card text-center h-100">
     <img src="images/sun.svg" class="card-img-top" alt="">
-      <div class="card-title" id="day">${forecast.dt}
+      <div class="card-title" id="day">${formatDate(forecast.dt * 1000)}
         </div>
         <div class="card-body" id="range">
         <div id="high">${Math.round(forecast.temp.max)}</div>
@@ -100,7 +109,7 @@ function serveFarenheit(event) {
 
 let currentTime = new Date();
 let todaysDate = document.querySelector("#local-time");
-todaysDate.innerHTML = formatDate(currentTime);
+todaysDate.innerHTML = formatTime(currentTime);
 
 let apiKey = "ca919d3d566d6ae96426df805fb208b2";
 let apiEndpoint = "https://api.openweathermap.org/data/2.5/";
