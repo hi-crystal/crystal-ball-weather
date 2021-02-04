@@ -57,7 +57,10 @@ function displayForecast(response) {
 
 //Temp display in default units
 function displayTemp(response) {
+  console.log(response.data);
   let currentTemp = Math.round(response.data.main.temp);
+  let humidity = response.data.main.humidity;
+  let windSpeed = Math.round(response.data.wind.speed);
   let unit = "metric";
   let unitDisplay = "°C";
   let city = response.data.name;
@@ -65,9 +68,10 @@ function displayTemp(response) {
   let longitude = response.data.coord.lon;
   apiUrl = `${apiEndpoint}onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=${unit}`;
 
-  document.querySelector("p").innerHTML = `It's currently ${currentTemp}${unitDisplay} in ${city}`;
+  document.querySelector("#weather").innerHTML = `It's currently ${currentTemp}${unitDisplay} in ${city}`;
+  document.querySelector("#humidity").innerHTML = `Humidity: ${humidity}%`;
+  document.querySelector("#wind").innerHTML = `Windspeed: ${windSpeed}`;
   axios.get(apiUrl).then(displayForecast);
-  console.log(apiUrl);
 }
 
 // Location entry form

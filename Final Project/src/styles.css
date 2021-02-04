@@ -7,22 +7,6 @@ h1 {
   padding: 20px 0px;
   margin: 0px;
 }
-.time {
-  font: bold;
-  font-size: medium;
-}
-img {
-  width: 100px;
-}
-p {
-  text-align: center;
-  color: #654062;
-  font-weight: bold;
-  font-size: x-large;
-}
-.current {
-  color: #67e1fc;
-}
 form div {
   text-align: center;
 }
