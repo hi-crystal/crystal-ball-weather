@@ -10,20 +10,21 @@ h1 {
 form div {
   text-align: center;
 }
-.cf-select {
-  text-align: center;
-  padding: 10px 10px 10px;
-}
 .btn-secondary {
   margin: 10px;
   border-radius: 20px;
-  color: #654062;
-  background: white;
-  box-shadow: 2px 2px;
 }
 .link a {
   text-decoration-line: none;
   display: block;
   text-align: center;
   margin: 40px;
+}
+div .weather-list {
+  display: block;
+  border: 10px;
+}
+.now {
+  margin: 0 auto;
+
 }

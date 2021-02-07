@@ -28,7 +28,7 @@
               class="form-control"
               type="location"
               id="location-input"
-              placeholder="Enter your location (e.g. Spokane, WA)"
+              placeholder="Enter location (e.g. Spokane, WA)"
               >
           </div>
           <div class="col-2">
@@ -51,36 +51,39 @@
           </div>
         </div>
       </form>
-      <div class="cf-select">
-          <a href="" id="cel-select">
-              Celcius
-          </a>
-          <span class="separate">
-            |
-          </span>
-          <a href="" id=far-select>
-            Farenheit
-            </a>
+      <div class="nav nav-pills justify-content-center unit-select">
+          <a class="nav-item nav-link active" href="#" id="cel-select">Celcius</a>
+          <a class="nav-item nav-link" href="#" id=far-select>Farenheit</a>
         </div>
-      <p>
-        <div id="weather">
-          <div id="temp">
-            <span class="current temp"></span>
-          </div>
-          <div id="unit">
-            <span class="current degree"></span>
-          </div>
-          <div id="loc">
-            <span class="current location"></span>
-          </div>
-        </div>
-        <div id="humidity">
-          <span class="current humidity"></span>
-        </div> 
-        <div id="wind">
-          <span class="current windspeed"></span>
-        </div>
-      </p>
+
+
+<br/>
+  <div class="card text-center now" style="max-width: 50%">
+    <div class="card-body">
+      <h5 class="card-title">Right Now</h5>
+      <div class="row row-cols-1">
+      <div id="weather">
+        <span class="current temp"></span>
+      </div>
+      <div id="unit">
+        <span class="current degree"></span>
+      </div>
+      <div id="loc">
+        <span class="current location"></span>
+      </div>
+    <div id="humidity">
+      <span class="current humidity"></span>
+    </div> 
+    <div id="wind">
+      <span class="current windspeed"></span>
+    </div>
+    </div>
+  </div>
+</div>
+<br/>
+
+
+
       <div class="card" style="width: 100%;">
           <div class="card-body">
             <h5 class="card-title">Coming Up Next</h5>

@@ -14,7 +14,6 @@ function formatTime(timestamp) {
 
 function formatDate(timestamp) {
   let date = new Date(timestamp);
-  console.log(date);
   let days = [
     "Sunday",
     "Monday",
@@ -25,7 +24,6 @@ function formatDate(timestamp) {
     "Saturday"
   ];
   let day = days[date.getDay()];
-  console.log(day);
 
   return `${day}`;
 }
@@ -38,7 +36,6 @@ function displayForecast(response) {
 
   for (let index = 1; index < 6; index++) {
     forecast = response.data.daily[index];
-    console.log(forecast);
     forecastElement.innerHTML += `
     <div class="col">
     <div class="card text-center h-100">
@@ -57,7 +54,6 @@ function displayForecast(response) {
 
 //Temp display in default units
 function displayTemp(response) {
-  console.log(response.data);
   let currentTemp = Math.round(response.data.main.temp);
   let humidity = response.data.main.humidity;
   let windSpeed = Math.round(response.data.wind.speed);
@@ -68,19 +64,23 @@ function displayTemp(response) {
   let longitude = response.data.coord.lon;
   apiUrl = `${apiEndpoint}onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=${unit}`;
 
-  document.querySelector("#weather").innerHTML = `It's currently ${currentTemp}${unitDisplay} in ${city}`;
+  document.querySelector("#weather").innerHTML = `It's ${currentTemp}${unitDisplay} in ${city}`;
   document.querySelector("#humidity").innerHTML = `Humidity: ${humidity}%`;
-  document.querySelector("#wind").innerHTML = `Windspeed: ${windSpeed}`;
+  document.querySelector("#wind").innerHTML = `Windspeed: ${windSpeed} km/h`;
   axios.get(apiUrl).then(displayForecast);
 }
 
-// Location entry form
-function searchByCity(event) {
+// Location input
+function searchByCity(city) {
+  let apiUrl = `${apiEndpoint}weather?q=${city}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayTemp);
+}
+
+function submitCity(event) {
   event.preventDefault();
   let city = document.querySelector("#location-input").value.trim();
-  let apiUrl = `${apiEndpoint}weather?q=${city}&appid=${apiKey}&units=${units}`;
-  if (city !== " ") {
-    axios.get(apiUrl).then(displayTemp);
+  if (city !== "") {
+    searchByCity(city);
   } else {
     alert(
       "Please enter your location or click Get Weather for My Current Location."
@@ -88,7 +88,7 @@ function searchByCity(event) {
   }
 }
 
-//Location coordinates
+//Location detect
 function searchByCoords(event) {
   event.preventDefault();
 
@@ -102,13 +102,17 @@ function searchByCoords(event) {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-//Celcius v Farenheit Links - couldn't get these to respond dynamically, will keep working at it
+//Unit conversion
 function serveCelcius(event) {
   event.preventDefault();
+  celSelected.classList.add("active");
+  farSelected.classList.remove("active");
 }
 
 function serveFarenheit(event) {
   event.preventDefault();
+  celSelected.classList.remove("active");
+  farSelected.classList.add("active");
 }
 
 let currentTime = new Date();
@@ -120,7 +124,7 @@ let apiEndpoint = "https://api.openweathermap.org/data/2.5/";
 let units = "metric";
 
 let locationForm = document.querySelector("#location-form");
-locationForm.addEventListener("submit", searchByCity);
+locationForm.addEventListener("submit", submitCity);
 
 let locationDetect = document.querySelector("#current-location");
 locationDetect.addEventListener("submit", searchByCoords);
@@ -130,3 +134,5 @@ celSelected.addEventListener("click", serveCelcius);
 
 let farSelected = document.querySelector("#far-select");
 farSelected.addEventListener("click", serveFarenheit);
+
+searchByCity("Boston");
