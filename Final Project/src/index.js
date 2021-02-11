@@ -30,6 +30,7 @@ function formatDate(timestamp) {
 
 //5-day forecast display
 function displayForecast(response) {
+  console.log(response);
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
@@ -39,12 +40,13 @@ function displayForecast(response) {
     forecastElement.innerHTML += `
     <div class="col">
     <div class="card text-center h-100">
-    <img src="images/sun.svg" class="card-img-top" alt="">
+    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" class="card-img-top" alt="${forecast.weather[0].description}">
       <div class="card-title" id="day">${formatDate(forecast.dt * 1000)}
         </div>
         <div class="card-body" id="range">
         <div id="high">${Math.round(forecast.temp.max)}</div>
         <div id="low">${Math.round(forecast.temp.min)}</div>
+        <h6 id="description">${forecast.weather[0].main}</h6>
         </div>
     </div>
   </div>
@@ -54,24 +56,36 @@ function displayForecast(response) {
 
 //Temp display in default units
 function displayTemp(response) {
+  console.log(response);
+  let icon = response.data.weather[0].icon;
+  let description = response.data.weather[0].description;
   let currentTemp = Math.round(response.data.main.temp);
   let humidity = response.data.main.humidity;
   let windSpeed = Math.round(response.data.wind.speed);
-  let unit = "metric";
-  let unitDisplay = "°C";
+  let units = "imperial";
+  let unitDisplay = "°F";
   let city = response.data.name;
   let latitude = response.data.coord.lat;
   let longitude = response.data.coord.lon;
-  apiUrl = `${apiEndpoint}onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=${unit}`;
+  apiUrl = `${apiEndpoint}onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=${units}`;
 
+  document.querySelector("#icon").setAttribute(
+    "src", `http://openweathermap.org/img/wn/${icon}@2x.png`
+  );
+  document.querySelector("#icon").setAttribute(
+    "alt", `${description}`
+  );
+  document.querySelector("#description").innerHTML = `${description}`;
   document.querySelector("#weather").innerHTML = `It's ${currentTemp}${unitDisplay} in ${city}`;
   document.querySelector("#humidity").innerHTML = `Humidity: ${humidity}%`;
-  document.querySelector("#wind").innerHTML = `Windspeed: ${windSpeed} km/h`;
+  document.querySelector("#wind").innerHTML = `Windspeed: ${windSpeed} mph`;
   axios.get(apiUrl).then(displayForecast);
 }
 
 // Location input
 function searchByCity(city) {
+
+  let units = "imperial";
   let apiUrl = `${apiEndpoint}weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayTemp);
 }
@@ -107,12 +121,23 @@ function serveCelcius(event) {
   event.preventDefault();
   celSelected.classList.add("active");
   farSelected.classList.remove("active");
+
+  getUnits("metric");
 }
 
 function serveFarenheit(event) {
   event.preventDefault();
   celSelected.classList.remove("active");
   farSelected.classList.add("active");
+
+  getUnits("imperial");
+}
+
+function getUnits(unit) {
+  if (unit === "") {
+    return "imperial"
+  }
+  else return unit;
 }
 
 let currentTime = new Date();
@@ -121,7 +146,6 @@ todaysDate.innerHTML = formatTime(currentTime);
 
 let apiKey = "ca919d3d566d6ae96426df805fb208b2";
 let apiEndpoint = "https://api.openweathermap.org/data/2.5/";
-let units = "metric";
 
 let locationForm = document.querySelector("#location-form");
 locationForm.addEventListener("submit", submitCity);
