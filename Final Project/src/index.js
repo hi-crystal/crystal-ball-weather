@@ -30,7 +30,6 @@ function formatDate(timestamp) {
 
 //5-day forecast display
 function displayForecast(response) {
-  console.log(response);
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
@@ -40,9 +39,8 @@ function displayForecast(response) {
     forecastElement.innerHTML += `
     <div class="col">
     <div class="card text-center h-100">
-    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" class="card-img-top" alt="${forecast.weather[0].description}">
-      <div class="card-title" id="day">${formatDate(forecast.dt * 1000)}
-        </div>
+    <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" class="card-img-top" alt="${forecast.weather[0].description}">
+      <div class="card-title" id="day">${formatDate(forecast.dt * 1000)}</div>
         <div class="card-body" id="range">
         <div id="high">${Math.round(forecast.temp.max)}</div>
         <div id="low">${Math.round(forecast.temp.min)}</div>
@@ -54,23 +52,20 @@ function displayForecast(response) {
     }
   }
 
-//Temp display in default units
+//Temp display in default units (F)
 function displayTemp(response) {
-  console.log(response);
   let icon = response.data.weather[0].icon;
   let description = response.data.weather[0].description;
   let currentTemp = Math.round(response.data.main.temp);
   let humidity = response.data.main.humidity;
   let windSpeed = Math.round(response.data.wind.speed);
-  let units = "imperial";
-  let unitDisplay = "°F";
   let city = response.data.name;
   let latitude = response.data.coord.lat;
   let longitude = response.data.coord.lon;
   apiUrl = `${apiEndpoint}onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=${units}`;
 
   document.querySelector("#icon").setAttribute(
-    "src", `http://openweathermap.org/img/wn/${icon}@2x.png`
+    "src", `https://openweathermap.org/img/wn/${icon}@2x.png`
   );
   document.querySelector("#icon").setAttribute(
     "alt", `${description}`
@@ -122,7 +117,7 @@ function serveCelcius(event) {
   celSelected.classList.add("active");
   farSelected.classList.remove("active");
 
-  getUnits("metric");
+
 }
 
 function serveFarenheit(event) {
@@ -133,12 +128,7 @@ function serveFarenheit(event) {
   getUnits("imperial");
 }
 
-function getUnits(unit) {
-  if (unit === "") {
-    return "imperial"
-  }
-  else return unit;
-}
+
 
 let currentTime = new Date();
 let todaysDate = document.querySelector("#local-time");
@@ -153,6 +143,8 @@ locationForm.addEventListener("submit", submitCity);
 let locationDetect = document.querySelector("#current-location");
 locationDetect.addEventListener("submit", searchByCoords);
 
+let units = "imperial";
+let unitDisplay = "°F";
 let celSelected = document.querySelector("#cel-select");
 celSelected.addEventListener("click", serveCelcius);
 
