@@ -21,11 +21,14 @@ form div {
   border-radius: 20px;
 }
 
+.link {
+  text-align: center;
+  margin: 20px;
+}
+
 .link a {
   text-decoration-line: none;
-  display: block;
-  text-align: center;
-  margin: 40px;
+  color: blueviolet;
 }
 
 div .weather-list {
@@ -36,3 +39,13 @@ div .weather-list {
   margin: 0 auto;
 }
 
+.high {
+  font-weight: bold;
+  font-size: larger;
+  color: blueviolet;
+}
+
+.wi {
+  color: blueviolet;
+  font-size: xx-large;
+}

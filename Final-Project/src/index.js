@@ -28,70 +28,59 @@ function formatDate(timestamp) {
   return `${day}`;
 }
 
-//5-day forecast display
+//5-day forecast
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
-  forecastElement.innerHTML = null;
-  let forecast = null;
+    forecastElement.innerHTML = null;
+
 
   for (let index = 1; index < 6; index++) {
     forecast = response.data.daily[index];
     forecastElement.innerHTML += `
-    <div class="col">
-    <div class="card text-center h-100">
-      <div class="card-title" id="day">${formatDate(forecast.dt * 1000)}</div>
-      <i class="card-img-top wi wi-owm-${forecast.weather[0].id}"></i>
-        <div class="card-body" id="range">
-        <h6 id="description">${forecast.weather[0].main}</h6>
-        <div id="high">${Math.round(forecast.temp.max)}</div>
-        <div id="low">${Math.round(forecast.temp.min)}</div>
+      <div class="col">
+        <div class="card text-center h-100">
+         <div class="card-title" id="day">${formatDate(forecast.dt * 1000).slice(0,3)}</div>
+          <i class="card-img-top wi wi-owm-${forecast.weather[0].id}"></i>
+          <div class="card-body" id="range">
+            <h6 id="description">${forecast.weather[0].main}</h6>
+            <div id="forecast-temps" class="high">${Math.round(forecast.temp.max)}</div>
+            <div id="forecast-temps" class="low">${Math.round(forecast.temp.min)}</div>
+          </div>
         </div>
-    </div>
-  </div>
-      `
-    }
+      </div>
+    `
   }
+}
 
-//Temp display in default units (F)
-function displayTemp(response) {
-  console.log(response);
-  let icon = response.data.weather[0].icon;
+// Current weather
+function displayWeather(response) {
   let iconId = response.data.weather[0].id;
   let description = response.data.weather[0].description;
-  let currentTemp = Math.round(response.data.main.temp);
-  let humidity = response.data.main.humidity;
-  let windSpeed = Math.round(response.data.wind.speed);
   let city = response.data.name;
+  let humidity = response.data.main.humidity;
+  fahrenheitTemp = Math.round(response.data.main.temp);
+  imperialSpeed = Math.round(response.data.wind.speed);
+
+
+  document.querySelector("#icon").classList.add(`wi-owm-${iconId}`);
+  document.querySelector("#description").innerHTML = `${description}`;
+  document.querySelector("#temperature").innerHTML = `${fahrenheitTemp}${tempUnit}`;
+  document.querySelector("#city").innerHTML = `${city}`;
+  document.querySelector("#humidity").innerHTML = `Humidity: ${humidity}%`;
+  document.querySelector("#wind").innerHTML = `Windspeed: ${imperialSpeed} ${speedUnit}`;
+
   let latitude = response.data.coord.lat;
   let longitude = response.data.coord.lon;
   apiUrl = `${apiEndpoint}onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=${units}`;
-
-  let iconDisplay = document.querySelector("#icon");
-    //iconDisplay.setAttribute("src", `https://openweathermap.org/img/wn/${icon}@2x.png`);
-    //iconDisplay.setAttribute("alt", `${description}`);
-    iconDisplay.classList.add(`wi-owm-${iconId}`);
-    console.log(iconDisplay);
-
-  document.querySelector("#description").innerHTML = `${description}`;
-  document.querySelector("#weather").innerHTML = `It's ${currentTemp}${unitDisplay} in ${city}`;
-  document.querySelector("#humidity").innerHTML = `Humidity: ${humidity}%`;
-  document.querySelector("#wind").innerHTML = `Windspeed: ${windSpeed} mph`;
   axios.get(apiUrl).then(displayForecast);
 }
 
-// Location input
-function searchByCity(city) {
-
-  let units = "imperial";
-  let apiUrl = `${apiEndpoint}weather?q=${city}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(displayTemp);
-}
-
-function submitCity(event) {
+// Get location from form
+function handleCity(event) {
   event.preventDefault();
   let city = document.querySelector("#location-input").value.trim();
   if (city !== "") {
-    searchByCity(city);
+    searchCity(city);
   } else {
     alert(
       "Please enter your location or click Get Weather for My Current Location."
@@ -99,8 +88,13 @@ function submitCity(event) {
   }
 }
 
-//Location detect
-function searchByCoords(event) {
+function searchCity(city) {
+  let apiUrl = `${apiEndpoint}weather?q=${city}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayWeather);
+}
+
+//Get location from navigator
+function searchCoords(event) {
   event.preventDefault();
 
   function showPosition(position) {
@@ -108,29 +102,49 @@ function searchByCoords(event) {
     let longitude = position.coords.longitude;
     let apiUrl = `${apiEndpoint}weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
 
-    axios.get(apiUrl).then(displayTemp);
+    axios.get(apiUrl).then(displayWeather);
   }
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
 //Unit conversion
-function serveCelcius(event) {
+function serveMetric(event) {
   event.preventDefault();
-  celSelected.classList.add("active");
-  farSelected.classList.remove("active");
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
 
+  let celsiusTemp = Math.round((fahrenheitTemp - 32)*5/9);
+  let metricSpeed = Math.round(imperialSpeed*1.609);
+  let tempUnit = "°C";
+  let speedUnit = "kph";
 
+  document.querySelector("#temperature").innerHTML = `${celsiusTemp}${tempUnit}`;
+  document.querySelector("#wind").innerHTML = `${metricSpeed} ${speedUnit}`;
+
+  let forecastTemps = document.querySelectorAll("#forecast-temps");
+    forecastTemps.forEach(function (temp) {
+      temp.innerHTML = Math.round((temp.innerHTML - 32) * 5/9);
+    });
+  chooseCelsius.removeEventListener("click", serveMetric);
+  chooseFahrenheit.addEventListener("click", serveImperial);
 }
 
-function serveFarenheit(event) {
+function serveImperial(event) {
   event.preventDefault();
-  celSelected.classList.remove("active");
-  farSelected.classList.add("active");
+  chooseCelsius.classList.remove("active");
+  chooseFahrenheit.classList.add("active");
 
-  getUnits("imperial");
+  document.querySelector("#temperature").innerHTML = `${fahrenheitTemp}${tempUnit}`;
+  document.querySelector("#wind").innerHTML = `${imperialSpeed} ${speedUnit}`;
+
+  let forecastTemps = document.querySelectorAll("#forecast-temps");
+  forecastTemps.forEach(function (temp) {
+    temp.innerHTML = Math.round((temp.innerHTML)*9/5+32);
+  });
+
+  chooseCelsius.addEventListener("click", serveMetric);
+  chooseFahrenheit.removeEventListener("click", serveImperial);
 }
-
-
 
 let currentTime = new Date();
 let todaysDate = document.querySelector("#local-time");
@@ -140,17 +154,22 @@ let apiKey = "ca919d3d566d6ae96426df805fb208b2";
 let apiEndpoint = "https://api.openweathermap.org/data/2.5/";
 
 let locationForm = document.querySelector("#location-form");
-locationForm.addEventListener("submit", submitCity);
+locationForm.addEventListener("submit", handleCity);
 
 let locationDetect = document.querySelector("#current-location");
-locationDetect.addEventListener("submit", searchByCoords);
+locationDetect.addEventListener("submit", searchCoords);
 
+let fahrenheitTemp = null;
+let imperialSpeed = null;
+let forecast = null;
 let units = "imperial";
-let unitDisplay = "°F";
-let celSelected = document.querySelector("#cel-select");
-celSelected.addEventListener("click", serveCelcius);
+let tempUnit = "°F";
+let speedUnit = "mph";
 
-let farSelected = document.querySelector("#far-select");
-farSelected.addEventListener("click", serveFarenheit);
+let chooseCelsius = document.querySelector("#celsius");
+chooseCelsius.addEventListener("click", serveMetric);
 
-searchByCity("Boston");
+let chooseFahrenheit = document.querySelector("#fahrenheit");
+chooseFahrenheit.addEventListener("click", serveImperial);
+
+searchCity("Boston");

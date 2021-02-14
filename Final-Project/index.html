@@ -21,7 +21,7 @@
         🔮 Crystal Ball Forecast
       </h1>
       <div id="local-time" class="time"></div>
-      <hr />
+      <hr/>
       <form id="location-form">
         <div class="row">
           <div class="col-10">
@@ -53,51 +53,41 @@
         </div>
       </form>
       <div class="nav nav-pills justify-content-center unit-select">
-          <a class="nav-item nav-link" href="#" id="cel-select">Celcius</a>
-          <a class="nav-item nav-link active" href="#" id=far-select>Farenheit</a>
-        </div>
-
-<br/>
-  <div class="card text-center now" style="max-width: 50%">
-    <div class="card-body">
-      <h5 class="card-title">Right Now</h5>
-      <div class="row row-cols-1">
-      <i id="icon" class="current icon wi"></i>
-      <h6 id="description">
-        <span class="current description"></span>
-      </h6>
-      <div id="weather">
-        <span class="current temp"></span>
-      </div>
-      <div id="unit">
-        <span class="current degree"></span>
-      </div>
-      <div id="loc">
-        <span class="current location"></span>
-      </div>
-    <div id="humidity">
-      <span class="current humidity"></span>
-    </div> 
-    <div id="wind">
-      <span class="current windspeed"></span>
-    </div>
-    </div>
-  </div>
-</div>
-<br/>
-
-
-
-      <div class="card" style="width: 100%;">
-          <div class="card-body">
-            <h5 class="card-title">Coming Up Next</h5>
-            <div class="row row-cols-5" id="forecast">
+          <a class="nav-item nav-link" href="#" id="celsius">Celsius</a>
+          <a class="nav-item nav-link active" href="#" id=fahrenheit>Fahrenheit</a>
+       </div>
+      <br/>
+      <div class="card text-center now" style="max-width: 50%">
+        <div class="card-body">
+          <h5 class="card-title">Right Now</h5>
+          <div class="row row-cols-1 current" id="weather">
+            <i id="icon" class="current icon wi"></i>
+            <h6 class="current description" id="description"></h6>
+            <p>
+              It's currently
+                <span id="temperature"></span>
+              in
+                <span id="city"></span>
+            </p>
+            <div id="humidity"></div> 
+            <div id="wind"></div>
           </div>
         </div>
       </div>
+      <br/>
+      <div class="card" style="width: 100%;">
+          <div class="card-body">
+            <h5 class="card-title">Coming Up Next</h5>
+            <div class="row row-cols-5" id="forecast"></div>
+          </div>
+        </div>
       <div id="git-link" class="link">
-        <a href="https://github.com/hi-crystal/crystal-ball-weather">Open-source code by CH</a>
+        <span> 
+          <a href="https://github.com/hi-crystal/crystal-ball-weather">Open-source code</a>
+          by CH
+        </span>
       </div>
+    </div>
     <script src="src/index.js"></script>
   </body>
 </html>
