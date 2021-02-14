@@ -54,6 +54,12 @@ function displayForecast(response) {
 
 // Current weather
 function displayWeather(response) {
+  chooseCelsius.classList.remove("active");
+  chooseFahrenheit.classList.add("active");
+
+  chooseCelsius.addEventListener("click", serveMetric);
+  chooseFahrenheit.removeEventListener("click", serveImperial);
+
   let iconId = response.data.weather[0].id;
   let description = response.data.weather[0].description;
   let city = response.data.name;
@@ -61,7 +67,7 @@ function displayWeather(response) {
   fahrenheitTemp = Math.round(response.data.main.temp);
   imperialSpeed = Math.round(response.data.wind.speed);
 
-
+  document.querySelector("#location-input").value = `${city}`;
   document.querySelector("#icon").classList.add(`wi-owm-${iconId}`);
   document.querySelector("#description").innerHTML = `${description}`;
   document.querySelector("#temperature").innerHTML = `${fahrenheitTemp}${tempUnit}`;
