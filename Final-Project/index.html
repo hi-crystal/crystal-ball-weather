@@ -11,82 +11,98 @@
       crossorigin="anonymous"
     />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Brygada+1918&display=swap" rel="stylesheet">
     <link href="src/css/styles.css" rel="stylesheet"/>
     <link href="src/css/weather-icons.min.css" rel="stylesheet"/>
   </head>
 
   <body>
     <div class="container">
-      <h1>
-        🔮 Crystal Ball Forecast
-      </h1>
-      <div id="local-time" class="time"></div>
-      <hr/>
-      <form id="location-form">
-        <div class="row">
-          <div class="col-10">
-              <input  
-              class="form-control"
-              type="location"
-              id="location-input"
-              placeholder="Enter location (e.g. Spokane, WA)"
-              >
-          </div>
-          <div class="col-2">
-              <input  
-              class="btn btn-primary" 
-              type="submit"  
-              value="Go ➜" 
-              >
-          </div>
-        </div>
-      </form>
-      <form id="current-location">
-        <div class="row">
-          <div class="col-12">
-              <input  
-              class="btn btn-secondary" 
-              type="submit"  
-              value="Get Weather for My Current Location 📍" 
-              >
-          </div>
-        </div>
-      </form>
-      <div class="nav nav-pills justify-content-center unit-select">
-          <a class="nav-item nav-link" href="#" id="celsius">Celsius</a>
-          <a class="nav-item nav-link active" href="#" id=fahrenheit>Fahrenheit</a>
-       </div>
-      <br/>
-      <div class="card text-center now" style="max-width: 50%">
+      <div class="card app border-0">
         <div class="card-body">
-          <h5 class="card-title">Right Now</h5>
-          <div class="row row-cols-1 current" id="weather">
-            <i id="icon" class="current icon wi"></i>
-            <h6 class="current description" id="description"></h6>
-            <p>
-              It's currently
-                <span id="temperature"></span>
-              in
-                <span id="city"></span>
-            </p>
-            <div id="humidity"></div> 
-            <div id="wind"></div>
+          <div class="row clearfix head">
+            <div class="col-10 float-left title">
+              <h1>
+                🔮 Crystal Ball Forecast
+              </h1>
+            </div>
+            <div class="col-2 float-right time" id="local-time"></div>
+          </div>
+          <form class="search rounded-pill" id="location-form">
+            <div class="input-group rounded-pill">
+              <input  
+                class="form-control rounded-pill border-0"
+                type="text"
+                id="location-input"
+                placeholder="Enter location (e.g. Spokane, WA)"
+                >
+              <button 
+                class="btn btn-primary col-3 flex-grow border-0 rounded-pill"
+                type="submit"  
+              >
+              Go ➜
+              </div>
+          </form>
+          <form class="geolocation" id="current-location">
+            <div class="row">
+              <div class="col-12">
+                  <input  
+                  class="btn btn-primary border-0 rounded-pill" 
+                  type="submit"  
+                  value="Get Weather for My Current Location ✨" 
+                  >
+              </div>
+            </div>
+          </form>
+          <div class="card w-50 border-0 now" style="max-width: 323.83px">
+            <img src="src/images/crystal-ball-95026.png" alt="crystal ball">
+            <div class="card-img-overlay row align-items-center card-body">
+              <div class="col">
+                <div class="card-text now" id="weather" style="max-width: 80%">
+                  <h5 id="city"></h5>
+                  <i class="current icon wi" id="icon"></i>
+                  <h6 class="current description" id="description"></h6>
+                  <div>
+                    <i id="sm-icon" class="wi wi-thermometer"></i>
+                    <span id="temperature"></span>
+                  </div>
+                  <div>
+                    <i id="sm-icon" class="wi wi-humidity"></i>
+                    <span id="humidity"></span> 
+                  </div>
+                  <div>
+                    <i id="sm-icon" class="wi wi-strong-wind"></i>
+                    <span id="wind"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav nav-pills justify-content-center unit-select">
+            <a class="nav-item nav-link rounded-pill active" href="#" id=fahrenheit>F</a>
+              <a class="nav-item nav-link rounded-pill" href="#" id="celsius">C</a>
+           </div>
+          <div class="card border-0 next" style="width: 100%;">
+              <div class="card-body forecast">
+                <h5 class="card-title">What the future holds...</h5>
+                <div class="row row-cols-5" id="forecast"></div>
+              </div>
+            </div>
+
+            <div id="git-link" class="link">
+            <span id="source"> 
+              <a href="https://github.com/hi-crystal/crystal-ball-weather">Open-source code</a>
+              by CH
+            </span>
+          </div>
+          <div class="border-top" id="quote">
+            <p>"The magic is inside you. There ain't no crystal ball." - Dolly Parton</p>
           </div>
         </div>
+        
       </div>
-      <br/>
-      <div class="card" style="width: 100%;">
-          <div class="card-body">
-            <h5 class="card-title">Coming Up Next</h5>
-            <div class="row row-cols-5" id="forecast"></div>
-          </div>
-        </div>
-      <div id="git-link" class="link">
-        <span> 
-          <a href="https://github.com/hi-crystal/crystal-ball-weather">Open-source code</a>
-          by CH
-        </span>
-      </div>
+
     </div>
     <script src="src/index.js"></script>
   </body>

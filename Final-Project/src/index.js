@@ -37,12 +37,12 @@ function displayForecast(response) {
   for (let index = 1; index < 6; index++) {
     forecast = response.data.daily[index];
     forecastElement.innerHTML += `
-      <div class="col">
-        <div class="card text-center h-100">
-         <div class="card-title" id="day">${formatDate(forecast.dt * 1000).slice(0,3)}</div>
+      <div class="col text-nowrap" id="forecast">
+        <div class="card border-0 text-center h-100">
+         <div class="card-header border-bottom" id="day">${formatDate(forecast.dt * 1000).slice(0,3)}</div>
           <i class="card-img-top wi wi-owm-${forecast.weather[0].id}"></i>
           <div class="card-body" id="range">
-            <h6 id="description">${forecast.weather[0].main}</h6>
+            <h6 id="description">${(forecast.weather[0].main)}</h6>
             <div id="forecast-temps" class="high">${Math.round(forecast.temp.max)}</div>
             <div id="forecast-temps" class="low">${Math.round(forecast.temp.min)}</div>
           </div>
@@ -67,13 +67,12 @@ function displayWeather(response) {
   fahrenheitTemp = Math.round(response.data.main.temp);
   imperialSpeed = Math.round(response.data.wind.speed);
 
-  document.querySelector("#location-input").value = `${city}`;
   document.querySelector("#icon").classList.add(`wi-owm-${iconId}`);
   document.querySelector("#description").innerHTML = `${description}`;
   document.querySelector("#temperature").innerHTML = `${fahrenheitTemp}${tempUnit}`;
   document.querySelector("#city").innerHTML = `${city}`;
-  document.querySelector("#humidity").innerHTML = `Humidity: ${humidity}%`;
-  document.querySelector("#wind").innerHTML = `Windspeed: ${imperialSpeed} ${speedUnit}`;
+  document.querySelector("#humidity").innerHTML = `${humidity}%`;
+  document.querySelector("#wind").innerHTML = `${imperialSpeed} ${speedUnit}`;
 
   let latitude = response.data.coord.lat;
   let longitude = response.data.coord.lon;

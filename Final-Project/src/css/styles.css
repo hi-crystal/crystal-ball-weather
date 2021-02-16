@@ -1,51 +1,112 @@
 body {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Brygada 1918', serif;
+  color: #585B83;
 }
-
+.container {
+  padding: 5% 5% 5%;
+}
+.app {
+  box-shadow: 0px 0px 25px -5px #c471f5;
+  border-radius: 10px;
+}
+.head {
+  padding: 16px;
+}
 h1 {
-  color: #654062;
-  font-variant: small-caps;
-  padding: 20px 0px;
+  color: #c471f5;
   margin: 0px;
 }
-
-h6 {
-  font-variant: small-caps;
+.title {
+  padding: 0;
+  align-self:flex-end;
 }
-form div {
+.time {
+  color: #c471f5;
+  font-weight: bold;
+  text-align: right;
+  align-self:flex-end;
+  padding: 0;
+}
+.search {
+  padding-bottom: 16px;
+}
+.input-group {
+  box-shadow: 0px 0px 25px -5px #c471f5;
+}
+
+.btn-primary {
+  background-image: linear-gradient(to bottom, #c471f5 0%, #fa71cd 100%); 
+}
+.geolocation {
+  padding-bottom: 16px;
   text-align: center;
 }
-
 .btn-secondary {
-  margin: 10px;
-  border-radius: 20px;
+  background-image: linear-gradient(to bottom, #c471f5 0%, #fa71cd 100%);
 }
-
-.link {
-  text-align: center;
-  margin: 20px;
-}
-
-.link a {
-  text-decoration-line: none;
-  color: blueviolet;
-}
-
-div .weather-list {
-  display: block;
-  border: 10px;
+.card-img-overlay {
+  padding: 0;
 }
 .now {
   margin: 0 auto;
+  text-align: center;
+  padding: 0;
+}
+h6 {
+  font-variant: small-caps;
+  text-transform: lowercase;
+  text-align: center;
+}
+#sm-icon.wi {
+  font-size: small;
+}
+.nav {
+  padding: 16px 0px;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-image: linear-gradient(to bottom, #c471f5 0%, #fa71cd 100%);
+  background-color: transparent;
+}
+a {
+  color: #c471f5;
+  text-decoration-line: none;
+}
+a:hover {
+  color: #c471f5;
+  font-weight: bold;
+}
+.next {
+  border-radius: 10px;
+}
+#day {
+  background-color: transparent;
+}
+.card-img-top {
+  padding: 8px 0px;
 }
 
 .high {
   font-weight: bold;
   font-size: larger;
-  color: blueviolet;
+  color: #c471f5;
+}
+.wi {
+  color: #c471f5;
+  font-size: xx-large;
+}
+.link {
+  text-align: center;
+  padding: 16px 0px;
+  font-size: small;
 }
 
-.wi {
-  color: blueviolet;
-  font-size: xx-large;
+#range {
+  padding: 0px;
+}
+
+#quote {
+  font-size: x-small;
+  text-align: center;
+  padding-top: 16px;
+  border-color: #c471f5;
 }
