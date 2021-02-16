@@ -33,7 +33,6 @@ function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
     forecastElement.innerHTML = null;
 
-
   for (let index = 1; index < 6; index++) {
     forecast = response.data.daily[index];
     forecastElement.innerHTML += `
@@ -101,12 +100,10 @@ function searchCity(city) {
 //Get location from navigator
 function searchCoords(event) {
   event.preventDefault();
-
   function showPosition(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     let apiUrl = `${apiEndpoint}weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-
     axios.get(apiUrl).then(displayWeather);
   }
   navigator.geolocation.getCurrentPosition(showPosition);
@@ -157,19 +154,18 @@ todaysDate.innerHTML = formatTime(currentTime);
 
 let apiKey = "ca919d3d566d6ae96426df805fb208b2";
 let apiEndpoint = "https://api.openweathermap.org/data/2.5/";
-
-let locationForm = document.querySelector("#location-form");
-locationForm.addEventListener("submit", handleCity);
-
-let locationDetect = document.querySelector("#current-location");
-locationDetect.addEventListener("submit", searchCoords);
-
 let fahrenheitTemp = null;
 let imperialSpeed = null;
 let forecast = null;
 let units = "imperial";
 let tempUnit = "°F";
 let speedUnit = "mph";
+
+let locationForm = document.querySelector("#location-form");
+locationForm.addEventListener("submit", handleCity);
+
+let locationDetect = document.querySelector("#current-location");
+locationDetect.addEventListener("submit", searchCoords);
 
 let chooseCelsius = document.querySelector("#celsius");
 chooseCelsius.addEventListener("click", serveMetric);

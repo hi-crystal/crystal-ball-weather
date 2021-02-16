@@ -32,6 +32,7 @@ h1 {
 }
 .input-group {
   box-shadow: 0px 0px 25px -5px #c471f5;
+  margin: 10px 0px;
 }
 .btn-primary {
   background-image: linear-gradient(to bottom, #c471f5 0%, #fa71cd 100%); 
@@ -39,9 +40,6 @@ h1 {
 .geolocation {
   padding-bottom: 16px;
   text-align: center;
-}
-.btn-secondary {
-  background-image: linear-gradient(to bottom, #c471f5 0%, #fa71cd 100%);
 }
 .card-img-overlay {
   padding: 0;
@@ -88,7 +86,6 @@ a:hover {
 .card-img-top {
   padding: 8px 0px;
 }
-
 .high {
   font-weight: bold;
   font-size: larger;
@@ -98,11 +95,6 @@ a:hover {
   color: #c471f5;
   font-size: xx-large;
 }
-.link {
-  text-align: center;
-  font-size: medium;
-  font-variant: small-caps;
-}
 #range {
   padding: 0px;
 }
@@ -111,4 +103,9 @@ a:hover {
   text-align: center;
   padding-top: 16px;
   border-color: #c471f5;
+}
+.link {
+  text-align: center;
+  font-size: medium;
+  font-variant: small-caps;
 }
