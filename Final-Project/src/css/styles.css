@@ -33,7 +33,6 @@ h1 {
 .input-group {
   box-shadow: 0px 0px 25px -5px #c471f5;
 }
-
 .btn-primary {
   background-image: linear-gradient(to bottom, #c471f5 0%, #fa71cd 100%); 
 }
@@ -51,6 +50,11 @@ h1 {
   margin: 0 auto;
   text-align: center;
   padding: 0;
+}
+#city {
+  font-weight: bold;
+  font-size: x-large;
+  color: #c471f5;
 }
 h6 {
   font-variant: small-caps;
@@ -96,14 +100,12 @@ a:hover {
 }
 .link {
   text-align: center;
-  font-size:medium;
+  font-size: medium;
   font-variant: small-caps;
 }
-
 #range {
   padding: 0px;
 }
-
 #quote {
   font-size: x-small;
   text-align: center;
