@@ -1,6 +1,6 @@
 # crystal-ball-weather
 SheCodes Plus Final Project
-https://www.shecodes.io/workshops
+https://www.shecodes.io/workshops/shecodes-plus-44-0/projects/247535
 
 Basic weather app built with:
 <ul>
